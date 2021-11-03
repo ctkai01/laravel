@@ -54,8 +54,7 @@ RUN chown -R sail:www-data storage
 RUN chown -R sail:www-data bootstrap/cache
 RUN chmod -R 775 storage
 RUN chmod -R 775 bootstrap/cache
+RUN chmod 666 /var/run/docker.sock
 RUN cp .env.example .env
-RUN chmod 777 -R storage bootstrap/cache
-RUN chmod -R 775 storage bootstrap/cache
 
 ENTRYPOINT ["start-container"]
