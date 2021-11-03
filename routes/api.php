@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\NotAuthController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Not Auth
+Route::post('signup', [NotAuthController::class, 'signup']);
+Route::post('login', [NotAuthController::class, 'login']);
+
+Route::group(['prefix' => 'auth', 'middleware' => 'auth:users-api'], function() {
+    Route::post('logout', [UserController::class, 'logout']);
+
 });
